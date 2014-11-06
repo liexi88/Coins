@@ -6,22 +6,44 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using NLog;
 
 namespace Coins
 {
-    // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
-    // visit http://go.microsoft.com/?LinkId=9394801
-
-    public class MvcApplication : System.Web.HttpApplication
+    public class MvcApplication : HttpApplication
     {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
         protected void Application_Start()
         {
+            Logger.Info("Application Start");
+
             AreaRegistration.RegisterAllAreas();
 
-            WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+        }
+
+        public override void Init()
+        {
+            Logger.Info("Application Init");
+        }
+
+        public override void Dispose()
+        {
+            Logger.Info("Application Dispose");
+        }
+
+        protected void Application_Error()
+        {
+            Logger.Info("Application Error");
+        }
+
+
+        protected void Application_End()
+        {
+            Logger.Info("Application End");
         }
     }
 }
