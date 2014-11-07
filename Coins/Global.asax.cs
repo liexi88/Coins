@@ -35,9 +35,9 @@ namespace Coins
             Logger.Info("Application Dispose");
         }
 
-        protected void Application_Error()
+        protected void Application_Error(Exception exception)
         {
-            Logger.Info("Application Error");
+            Logger.Info("Application Error: " + exception);
         }
 
 
